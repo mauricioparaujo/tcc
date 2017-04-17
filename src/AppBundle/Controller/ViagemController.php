@@ -3,31 +3,40 @@
 namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations\View;
 
 class ViagemController extends FOSRestController
 {
+    /**
+     * @View()
+     */
     public function getViagemAction($id)
     {
         $viagem = [];
-        $view = $this->view($viagem, 200)
-            ->setTemplate("StaticBundle:Viagem:getViagem.html.twig")
-            ->setTemplateVar('');
-
-        return $this->handleView($view);
+        return $viagem;
     }
 
+    /**
+     * @View(statusCode=204)
+     */
     public function deleteViagemAction($id)
     {
-
+        //return void
     }
 
+    /**
+     * @View(statusCode=204)
+     */
     public function updateViagemAction($id, $updated)
     {
-
+        //return void
     }
 
+    /**
+     * @View(statusCode=201)
+     */
     public function createViagemAction($id, $new)
     {
-
+        //return void
     }
 }

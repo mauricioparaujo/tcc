@@ -3,31 +3,40 @@
 namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations\View;
 
 class MotoristaController extends FOSRestController
 {
+    /**
+     * @View()
+     */
     public function getMotoristaAction($id)
     {
         $motorista = [];
-        $view = $this->view($motorista, 200)
-            ->setTemplate("StaticBundle:Motorista:getMotorista.html.twig")
-            ->setTemplateVar('');
-
-        return $this->handleView($view);
+        return $motorista;
     }
 
+    /**
+     * @View(statusCode=204)
+     */
     public function deleteMotoristaAction($id)
     {
-
+        //return void
     }
 
+    /**
+     * @View(statusCode=204)
+     */
     public function updateMotoristaAction($id, $updated)
     {
-
+        //return void
     }
 
+    /**
+     * @View(statusCode=201)
+     */
     public function createMotoristaAction($id, $new)
     {
-
+        //return void
     }
 }

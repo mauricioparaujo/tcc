@@ -3,31 +3,40 @@
 namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations\View;
 
 class LocalizacaoController extends FOSRestController
 {
+    /**
+     * @View()
+     */
     public function getLocalizacaoAction($id)
     {
         $localizacao = [];
-        $view = $this->view($localizacao, 200)
-            ->setTemplate("StaticBundle:Localizacao:getLocalizacao.html.twig")
-            ->setTemplateVar('');
-
-        return $this->handleView($view);
+        return $localizacao;
     }
 
+    /**
+     * @View(statusCode=204)
+     */
     public function deleteLocalizacaoAction($id)
     {
-
+        //return void
     }
 
+    /**
+     * @View(statusCode=204)
+     */
     public function updateLocalizacaoAction($id, $updated)
     {
-
+        //return void
     }
 
+    /**
+     * @View(statusCode=201)
+     */
     public function createLocalizacaoAction($id, $new)
     {
-
+        //return void
     }
 }
