@@ -1,0 +1,8 @@
+motorista:
+    type: rest
+    resource: AppBundle\Controller\MotoristaController
+
+#viagem:
+#    type: rest
+#    parent: motorista
+#    resource: AppBundle\Controller\ViagemController

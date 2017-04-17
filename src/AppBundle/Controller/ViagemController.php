@@ -10,7 +10,7 @@ class ViagemController extends FOSRestController
     /**
      * @View()
      */
-    public function getViagemAction($id)
+    public function getAction($motoristaId, $viagemId)
     {
         $viagem = [];
         return $viagem;

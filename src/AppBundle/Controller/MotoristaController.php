@@ -3,25 +3,27 @@
 namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations\View as ViewAnnotation;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
+use FOS\RestBundle\View\View;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 
 /**
- * @RouteResource("Motorista", pluralize=false)
+ * @RouteResource("motorista", pluralize=false)
  */
 class MotoristaController extends FOSRestController
 {
     /**
      * Retorna um motorista
      *
-     * rota: [GET] /motorista/id
-     *
-     * @View()
+     * rota: "get_motorista" [GET] /motorista/{id}
      */
-    public function getMotoristaAction($id)
+    public function getAction($id)
     {
-        $motorista = [];
-        return $motorista;
+        return new JsonResponse($id, Response::HTTP_OK);
     }
 
     /**
@@ -29,7 +31,7 @@ class MotoristaController extends FOSRestController
      *
      * rota: [DELETE] /motorista/{id}
      *
-     * @View(statusCode=204)
+     * @ViewAnnotation(statusCode=204)
      */
     public function deleteMotoristaAction($id)
     {

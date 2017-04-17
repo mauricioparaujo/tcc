@@ -1,8 +1,3 @@
 app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
-
-motorista:
     type: rest
-    host: localhost
-    resource: AppBundle\Controller\MotoristaController
+    resource: '@AppBundle/Resources/config/routing.yml'
