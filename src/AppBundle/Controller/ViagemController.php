@@ -35,7 +35,7 @@ class ViagemController extends FOSRestController
     /**
      * @View(statusCode=201)
      */
-    public function createViagemAction($id, $new)
+    public function neweViagemLocalizacaoAction($id, $new)
     {
         //return void
     }

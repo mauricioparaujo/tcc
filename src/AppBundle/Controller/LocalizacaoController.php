@@ -27,15 +27,7 @@ class LocalizacaoController extends FOSRestController
     /**
      * @View(statusCode=204)
      */
-    public function updateLocalizacaoAction($id, $updated)
-    {
-        //return void
-    }
-
-    /**
-     * @View(statusCode=201)
-     */
-    public function createLocalizacaoAction($id, $new)
+    public function updateLocalizacaoAction($id)
     {
         //return void
     }
