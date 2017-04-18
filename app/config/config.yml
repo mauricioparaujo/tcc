@@ -87,3 +87,8 @@ fos_rest:
             json: true
     routing_loader:
         default_format: json
+
+jms_serializer:
+    visitors:
+        json:
+            options: [JSON_UNESCAPED_SLASHES, JSON_UNESCAPED_UNICODE]

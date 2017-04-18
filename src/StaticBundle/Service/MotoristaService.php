@@ -2,19 +2,43 @@
 
 namespace StaticBundle\Service;
 
+use Doctrine\ORM\EntityNotFoundException;
 use StaticBundle\Data\Repository\MotoristaRepository;
-use StaticBundle\Mapper\MapperInterface;
 
-class MotoristaService extends AbstractService
+class MotoristaService
 {
-    public function __construct(MotoristaRepository $repository, MapperInterface $mapper)
+    private $repository;
+
+    public function __construct(MotoristaRepository $repository)
     {
-        parent::__construct($repository, $mapper);
+        $this->repository = $repository;
     }
 
-    public function getMotorista($id)
+    public function getMotorista(int $id)
     {
-        $motorista = $this->repository->findById($id);
-        return $this->mapSingleEntity($motorista);
+        $motorista = $this->repository->findOneById($id);
+
+        if (!$motorista) {
+            throw new EntityNotFoundException();
+        }
+
+        return $motorista;
+    }
+
+    public function createMotorista(string $nome)
+    {
+        return $this->repository->createMotorista($nome);
+    }
+
+    public function updateMotorista(int $id, string $nome)
+    {
+        $motorista = $this->getMotorista($id);
+        return $this->repository->updateMotorista($motorista, $nome);
+    }
+
+    public function deleteMotorista(int $id)
+    {
+        $motorista = $this->getMotorista($id);
+        $this->repository->deleteMotorista($motorista);
     }
 }

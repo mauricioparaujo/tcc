@@ -5,13 +5,9 @@ parameters:
 
 # Eu sei que é feio injetar classes desse jeito mas a gente tá com pressa
 services:
-    # factories
-    factory.mapper:
-        class: StaticBundle\Mapper\MapperFactory
-
     factory.services:
         class: StaticBundle\Service\ServiceFactory
-        arguments: ['@doctrine.orm.default_entity_manager', '@factory.mapper']
+        arguments: ['@doctrine.orm.default_entity_manager']
 
     # Serviços
     service.motorista:

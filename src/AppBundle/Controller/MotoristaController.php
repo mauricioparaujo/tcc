@@ -2,11 +2,13 @@
 
 namespace AppBundle\Controller;
 
+use Doctrine\ORM\EntityNotFoundException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use FOS\RestBundle\Controller\Annotations\View;
+use StaticBundle\Data\Entity\Motorista;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 
 /**
  * @RouteResource("motorista", pluralize=false)
@@ -20,11 +22,10 @@ class MotoristaController extends FOSRestController
      * * "get_motorista"
      * * [GET] /motorista/{id}
      */
-    public function getAction($id)
+    public function getAction(int $id)
     {
-        $service = $this->get('service.motorista');
-        $motorista = $service->getMotorista($id);
-        return new JsonResponse($motorista->getName(), Response::HTTP_OK);
+        $motorista = $this->findMotorista($id);
+        return new Response($this->serialize($motorista), Response::HTTP_OK);
     }
 
     /**
@@ -32,11 +33,14 @@ class MotoristaController extends FOSRestController
      *
      * rota:
      * * "post_motorista"
-     * * [POST] /motorista/{id}
+     * * [POST] /motorista
      */
-    public function postAction($id)
+    public function postAction(Request $request)
     {
-        return new JsonResponse($id, Response::HTTP_OK);
+        $nome = $request->get('nome');
+
+        $motorista = $this->get('service.motorista')->createMotorista($nome);
+        return new Response($this->serialize($motorista), Response::HTTP_CREATED);
     }
 
     /**
@@ -46,9 +50,10 @@ class MotoristaController extends FOSRestController
      * * "delete_motorista"
      * * [DELETE] /motorista/{id}
      */
-    public function deleteAction($id)
+    public function deleteAction(int $id)
     {
-        //return void
+        $this->get('service.motorista')->deleteMotorista($id);
+        return new Response('', Response::HTTP_NO_CONTENT);
     }
 
     /**
@@ -58,8 +63,27 @@ class MotoristaController extends FOSRestController
      * * "put_motorista"
      * * [PUT] /motorista/{id}
      */
-    public function putAction($id)
+    public function putAction(Request $request, int $id)
     {
-        //return void
+        $nome = $request->get('nome');
+        $motorista = $this->get('service.motorista')->updateMotorista($id, $nome);
+        return new Response($this->serialize($motorista), Response::HTTP_ACCEPTED);
+    }
+
+    private function findMotorista(int $id)
+    {
+        try {
+            $motorista = $this->get('service.motorista')->getMotorista($id);
+        } catch (EntityNotFoundException $e) {
+            throw $this->createNotFoundException('Motorista nao encontrado');
+        }
+
+        return $motorista;
+    }
+
+    private function serialize(Motorista $motorista)
+    {
+        $serializer = $this->get('jms_serializer');
+        return $serializer->serialize($motorista, 'json');
     }
 }

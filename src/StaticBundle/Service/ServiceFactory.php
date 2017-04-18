@@ -11,19 +11,16 @@ class ServiceFactory
     protected $entityManager;
     protected $mapperFactory;
 
-    public function __construct(EntityManagerInterface $entityManager, MapperFactory $mapperFactory)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->mapperFactory = $mapperFactory;
     }
 
     public function getMotoristaService()
     {
         if (!isset($this->instances['MotoristaService'])) {
-            $this->instances['MotoristaService'] = new MotoristaService(
-                $this->entityManager->getRepository('StaticBundle:Motorista'),
-                $this->mapperFactory->getMotoristaMapper()
-            );
+            $this->instances['MotoristaService'] =
+                new MotoristaService($this->entityManager->getRepository('StaticBundle:Motorista'));
         }
         return $this->instances['MotoristaService'];
     }
@@ -31,10 +28,8 @@ class ServiceFactory
     public function getViagemService()
     {
         if (!isset($this->instances['ViagemService'])) {
-            $this->instances['ViagemService'] = new ViagemService(
-                $this->entityManager->getRepository('StaticBundle:StaticBundle\Data\Repository\Viagem'),
-                $this->mapperFactory->getViagemMapper()
-            );
+            $this->instances['ViagemService'] =
+                new ViagemService($this->entityManager->getRepository('StaticBundle:Viagem'));
         }
         return $this->instances['ViagemService'];
     }
@@ -42,10 +37,8 @@ class ServiceFactory
     public function getLocalizacaoService()
     {
         if (!isset($this->instances['LocalizacaoService'])) {
-            $this->instances['LocalizacaoService'] = new LocalizacaoService(
-                $this->entityManager->getRepository('StaticBundle:StaticBundle\Data\Repository\Localizacao'),
-                $this->mapperFactory->getLocalizacaoMapper()
-            );
+            $this->instances['LocalizacaoService'] =
+                new LocalizacaoService($this->entityManager->getRepository('StaticBundle:Localizacao'));
         }
         return $this->instances['LocalizacaoaService'];
     }
