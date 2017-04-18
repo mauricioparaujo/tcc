@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 use Doctrine\ORM\EntityNotFoundException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
-use FOS\RestBundle\Controller\Annotations\View;
 use StaticBundle\Data\Entity\Motorista;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

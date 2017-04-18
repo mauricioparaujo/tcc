@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Motorista
  *
- * @ORM\Table(name="data_entity_motorista")
+ * @ORM\Table(name="motorista")
  * @ORM\Entity(repositoryClass="StaticBundle\Data\Repository\MotoristaRepository")
  */
 class Motorista
@@ -24,10 +24,14 @@ class Motorista
     /**
      * @var string
      *
-     * @ORM\Column(name="nome", type="string", length=255)
+     * @ORM\Column(name="nome", type="string", length=255, nullable=true)
      */
     private $nome;
 
+    /**
+     * @OneToMany(targetEntity="Viagem", mappedBy="motorista")
+     */
+    private $viagens;
 
     /**
      * Get id
@@ -62,5 +66,23 @@ class Motorista
     {
         return $this->nome;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getViagens()
+    {
+        return $this->viagens;
+    }
+
+    /**
+     * @param mixed $viagens
+     */
+    public function setViagens($viagens)
+    {
+        $this->viagens = $viagens;
+    }
+
+
 }
 
