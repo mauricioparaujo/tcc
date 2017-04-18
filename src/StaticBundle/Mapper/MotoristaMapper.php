@@ -4,9 +4,9 @@ namespace StaticBundle\Mapper;
 
 class MotoristaMapper implements MapperInterface
 {
-    public function getDomainModel()
+    public function getDomainModel(array $entity)
     {
-        // TODO: Implement getDomainModel() method.
+        var_dump($entity); die;
     }
 
     public function getDataModel()

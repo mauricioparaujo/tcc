@@ -14,7 +14,7 @@ class MotoristaService extends AbstractService
 
     public function getMotorista($id)
     {
-        $motorista = $this->repository->getMotorista($id);
+        $motorista = $this->repository->findById($id);
         return $this->mapSingleEntity($motorista);
     }
 }

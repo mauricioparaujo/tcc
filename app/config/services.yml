@@ -5,36 +5,24 @@ parameters:
 
 # Eu sei que é feio injetar classes desse jeito mas a gente tá com pressa
 services:
-    # Mappers
-    mapper.motorista:
-        class: StaticBundle\Mapper\MotoristaMapper
+    # factories
+    factory.mapper:
+        class: StaticBundle\Mapper\MapperFactory
 
-    mapper.viagem:
-        class: StaticBundle\Mapper\ViagemMapper
-
-    mapper.localizacao:
-        class: StaticBundle\Mapper\LocalizacaoMapper
-
-    # Repositorios
-    repository.motorista:
-        class: StaticBundle\Repository\MotoristaRepository
-
-    repository.viagem:
-        class: StaticBundle\Repository\ViagemRepository
-
-    repository.localizacao:
-        class: StaticBundle\Repository\LocalizacaoRepository
+    factory.services:
+        class: StaticBundle\Service\ServiceFactory
+        arguments: ['@doctrine.orm.default_entity_manager', '@factory.mapper']
 
     # Serviços
     service.motorista:
         class: StaticBundle\Service\MotoristaService
-        arguments: ['@repository.motorista', '@mapper.motorista']
+        factory: ['@factory.services', 'getMotoristaService']
 
     service.viagem:
         class: StaticBundle\Service\ViagemService
-        arguments: ['@repository.viagem', '@mapper.viagem']
+        factory: ['@factory.services', 'getViagemService']
 
     service.localizacao:
         class: StaticBundle\Service\LocalizacaoService
-        arguments: ['@repository.localizacao', '@mapper.localizacao']
+        factory: ['@factory.services', 'getViagemService']
 

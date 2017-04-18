@@ -22,7 +22,9 @@ class MotoristaController extends FOSRestController
      */
     public function getAction($id)
     {
-        return new JsonResponse($id, Response::HTTP_OK);
+        $service = $this->get('service.motorista');
+        $motorista = $service->getMotorista($id);
+        return new JsonResponse($motorista->getName(), Response::HTTP_OK);
     }
 
     /**
