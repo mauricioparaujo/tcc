@@ -3,7 +3,38 @@
 parameters:
     #parameter_name: value
 
+# Eu sei que é feio injetar classes desse jeito mas a gente tá com pressa
 services:
-    #service_name:
-    #    class: AppBundle\Directory\ClassName
-    #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+    # Mappers
+    mapper.motorista:
+        class: StaticBundle\Mapper\MotoristaMapper
+
+    mapper.viagem:
+        class: StaticBundle\Mapper\ViagemMapper
+
+    mapper.localizacao:
+        class: StaticBundle\Mapper\LocalizacaoMapper
+
+    # Repositorios
+    repository.motorista:
+        class: StaticBundle\Repository\MotoristaRepository
+
+    repository.viagem:
+        class: StaticBundle\Repository\ViagemRepository
+
+    repository.localizacao:
+        class: StaticBundle\Repository\LocalizacaoRepository
+
+    # Serviços
+    service.motorista:
+        class: StaticBundle\Service\MotoristaService
+        arguments: ['@repository.motorista', '@mapper.motorista']
+
+    service.viagem:
+        class: StaticBundle\Service\ViagemService
+        arguments: ['@repository.viagem', '@mapper.viagem']
+
+    service.localizacao:
+        class: StaticBundle\Service\LocalizacaoService
+        arguments: ['@repository.localizacao', '@mapper.localizacao']
+
