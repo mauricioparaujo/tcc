@@ -2,7 +2,12 @@ motorista:
     type: rest
     resource: AppBundle\Controller\MotoristaController
 
-#viagem:
-#    type: rest
-#    parent: motorista
-#    resource: AppBundle\Controller\ViagemController
+viagem:
+    type: rest
+    parent: motorista
+    resource: AppBundle\Controller\ViagemController
+
+localizacao:
+    type: rest
+    parent: viagem
+    resource: AppBundle\Controller\LocalizacaoController

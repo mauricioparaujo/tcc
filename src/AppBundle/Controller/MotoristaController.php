@@ -3,11 +3,8 @@
 namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\View as ViewAnnotation;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
-use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -19,7 +16,9 @@ class MotoristaController extends FOSRestController
     /**
      * Retorna um motorista
      *
-     * rota: "get_motorista" [GET] /motorista/{id}
+     * rota:
+     * * "get_motorista"
+     * * [GET] /motorista/{id}
      */
     public function getAction($id)
     {
@@ -27,44 +26,38 @@ class MotoristaController extends FOSRestController
     }
 
     /**
+     * Cria um motorista
+     *
+     * rota:
+     * * "post_motorista"
+     * * [POST] /motorista/{id}
+     */
+    public function postAction($id)
+    {
+        return new JsonResponse($id, Response::HTTP_OK);
+    }
+
+    /**
      * Deleta um motorista
      *
-     * rota: [DELETE] /motorista/{id}
-     *
-     * @ViewAnnotation(statusCode=204)
+     * rota:
+     * * "delete_motorista"
+     * * [DELETE] /motorista/{id}
      */
-    public function deleteMotoristaAction($id)
+    public function deleteAction($id)
     {
         //return void
     }
 
     /**
-     * Atualiza um motorista
+     * Atualiza motorista
      *
-     * rota: [PUT] /motorista/{id}
+     * rota:
+     * * "put_motorista"
+     * * [PUT] /motorista/{id}
      */
-    public function putMotoristaAction($id)
+    public function putAction($id)
     {
         //return void
-    }
-
-    /**
-     * Cria um novo motorista
-     *
-     * rota: [POST] /motorista
-     */
-    public function postMotoristaAction()
-    {
-        //return void
-    }
-
-    /**
-     * Cria uma nova viagem para um motorista
-     *
-     * rota: [POST] /motorista/{id}/viagem
-     */
-    public function postMotoristaViagemAction($id)
-    {
-
     }
 }

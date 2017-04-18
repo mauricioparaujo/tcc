@@ -3,39 +3,59 @@
 namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations\RouteResource;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @RouteResource("viagem", pluralize=false)
+ */
 class ViagemController extends FOSRestController
 {
     /**
-     * @View()
+     * Retorna uma viagem de um motorista
+     *
+     * rota:
+     * * "get_motorista_viagem"
+     * * [GET] /motorista/{motoristaId}/viagem/{id}
      */
-    public function getAction($motoristaId, $viagemId)
+    public function getAction($motoristaId, $id)
     {
-        $viagem = [];
-        return $viagem;
+        return new JsonResponse($id, Response::HTTP_OK);
     }
 
     /**
-     * @View(statusCode=204)
+     * Retorna uma viagem de um motorista
+     *
+     * rota:
+     * * "post_motorista_viagem"
+     * * [POST] /motorista/{motoristaId}/viagem/{id}
      */
-    public function deleteViagemAction($id)
+    public function postAction($motoristaId, $id)
+    {
+        return new JsonResponse($id, Response::HTTP_OK);
+    }
+
+    /**
+     * Deleta uma viagem de um motorista
+     *
+     * rota:
+     * * "delete_motorista_viagem"
+     * * [DELETE] /motorista/{motoristaId}/viagem/{id}
+     */
+    public function deleteAction($motoristaId, $id)
     {
         //return void
     }
 
     /**
-     * @View(statusCode=204)
+     * Atualiza uma viagem de um motorista
+     *
+     * rota:
+     * * "put_motorista_viagem"
+     * * [PUT] /motorista/{motoristaId}/viagem/{id}
      */
-    public function updateViagemAction($id, $updated)
-    {
-        //return void
-    }
-
-    /**
-     * @View(statusCode=201)
-     */
-    public function neweViagemLocalizacaoAction($id, $new)
+    public function putAction($motoristaId, $id)
     {
         //return void
     }
