@@ -45,7 +45,7 @@ class Viagem
     private $motorista;
 
     /**
-     * @OneToMany(targetEntity="Localizacao", mappedBy="viagem")
+     * @OneToMany(targetEntity="Localizacao", mappedBy="viagem", cascade={"remove"})
      */
     private $localizacoes;
 

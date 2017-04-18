@@ -19,35 +19,27 @@ class Localizacao
      */
     private $id;
 
-    /**
-     * @ORM\Column(name="inicio", type="datetime")
-     */
-    private $inicio;
+    private $acuracia;
 
-    /**
-     * @ORM\Column(name="fim", type="datetime")
-     */
-    private $fim;
+    private $direcao;
 
-    /**
-     * @ORM\Column(name="fotoInicial", type="string", length=255, nullable=false)
-     */
-    private $fotoInicial;
+    private $acuraciaDirecao;
 
-    /**
-     * @ORM\Column(name="fotoFinal", type="string", length=255, nullable=true)
-     */
-    private $fotoFinal;
+    private $timestamp;
 
-    /**
-     * @ManyToOne(targetEntity="Motorista", inversedBy="viagens")
-     */
-    private $motorista;
+    private $latitude;
 
-    /**
-     * @OneToMany(targetEntity="Localizacao", mappedBy="viagem")
-     */
-    private $localizacoes;
+    private $longitude;
+
+    private $provider;
+
+    private $velocidade;
+
+    private $acuraciaVelocidade;
+
+    private $acuraciaVertical;
+
+    private $viagem;
 
     /**
      * Get id
@@ -62,96 +54,160 @@ class Localizacao
     /**
      * @return mixed
      */
-    public function getMotorista()
+    public function getAcuracia()
     {
-        return $this->motorista;
+        return $this->acuracia;
     }
 
     /**
-     * @param mixed $motorista
+     * @param mixed $acuracia
      */
-    public function setMotorista($motorista)
+    public function setAcuracia($acuracia)
     {
-        $this->motorista = $motorista;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getInicio()
-    {
-        return $this->inicio;
-    }
-
-    /**
-     * @param mixed $inicio
-     */
-    public function setInicio($inicio)
-    {
-        $this->inicio = $inicio;
+        $this->acuracia = $acuracia;
     }
 
     /**
      * @return mixed
      */
-    public function getFim()
+    public function getDirecao()
     {
-        return $this->fim;
+        return $this->direcao;
     }
 
     /**
-     * @param mixed $fim
+     * @param mixed $direcao
      */
-    public function setFim($fim)
+    public function setDirecao($direcao)
     {
-        $this->fim = $fim;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFotoInicial()
-    {
-        return $this->fotoInicial;
-    }
-
-    /**
-     * @param mixed $fotoInicial
-     */
-    public function setFotoInicial($fotoInicial)
-    {
-        $this->fotoInicial = $fotoInicial;
+        $this->direcao = $direcao;
     }
 
     /**
      * @return mixed
      */
-    public function getFotoFinal()
+    public function getAcuraciaDirecao()
     {
-        return $this->fotoFinal;
+        return $this->acuraciaDirecao;
     }
 
     /**
-     * @param mixed $fotoFinal
+     * @param mixed $acuraciaDirecao
      */
-    public function setFotoFinal($fotoFinal)
+    public function setAcuraciaDirecao($acuraciaDirecao)
     {
-        $this->fotoFinal = $fotoFinal;
+        $this->acuraciaDirecao = $acuraciaDirecao;
     }
 
     /**
      * @return mixed
      */
-    public function getLocalizacoes()
+    public function getTimestamp()
     {
-        return $this->localizacoes;
+        return $this->timestamp;
     }
 
     /**
-     * @param mixed $localizacoes
+     * @param mixed $timestamp
      */
-    public function setLocalizacoes($localizacoes)
+    public function setTimestamp($timestamp)
     {
-        $this->localizacoes = $localizacoes;
+        $this->timestamp = $timestamp;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param mixed $latitude
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @param mixed $longitude
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProvider()
+    {
+        return $this->provider;
+    }
+
+    /**
+     * @param mixed $provider
+     */
+    public function setProvider($provider)
+    {
+        $this->provider = $provider;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVelocidade()
+    {
+        return $this->velocidade;
+    }
+
+    /**
+     * @param mixed $velocidade
+     */
+    public function setVelocidade($velocidade)
+    {
+        $this->velocidade = $velocidade;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAcuraciaVelocidade()
+    {
+        return $this->acuraciaVelocidade;
+    }
+
+    /**
+     * @param mixed $acuraciaVelocidade
+     */
+    public function setAcuraciaVelocidade($acuraciaVelocidade)
+    {
+        $this->acuraciaVelocidade = $acuraciaVelocidade;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAcuraciaVertical()
+    {
+        return $this->acuraciaVertical;
+    }
+
+    /**
+     * @param mixed $acuraciaVertical
+     */
+    public function setAcuraciaVertical($acuraciaVertical)
+    {
+        $this->acuraciaVertical = $acuraciaVertical;
     }
 }
