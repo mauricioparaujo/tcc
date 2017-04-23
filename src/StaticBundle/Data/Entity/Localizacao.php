@@ -2,6 +2,8 @@
 
 namespace StaticBundle\Data\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Localizacao
  *
@@ -19,27 +21,72 @@ class Localizacao
      */
     private $id;
 
-    private $acuracia;
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="acuracia", type="float", nullable=false)
+     */
+    private $acuracia = 0.0;
 
-    private $direcao;
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="direcao", type="float")
+     */
+    private $direcao = 0.0;
 
-    private $acuraciaDirecao;
 
-    private $timestamp;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     */
+    private $timestamp = 0;
 
-    private $latitude;
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="latitude", type="float", nullable=false)
+     */
+    private $latitude = 0.0;
 
-    private $longitude;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="longitude", type="float", nullable=false)
+     */
+    private $longitude = 0.0;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="provider", type="text")
+     */
     private $provider;
 
-    private $velocidade;
 
-    private $acuraciaVelocidade;
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="velocidade", type="float", nullable=false)
+     */
+    private $velocidade = 0.0;
 
-    private $acuraciaVertical;
 
+    /**
+     * @var Viagem
+     *
+     * @ORM\ManyToOne(targetEntity="Viagem", inversedBy="localizacoes")
+     * @ORM\JoinColumn(name="viagem_id", referencedColumnName="id")
+     */
     private $viagem;
+
+    public function __construct(Viagem $viagem)
+    {
+        $this->viagem = $viagem;
+    }
 
     /**
      * Get id
@@ -52,162 +99,130 @@ class Localizacao
     }
 
     /**
-     * @return mixed
+     * @return float
      */
-    public function getAcuracia()
+    public function getAcuracia(): float
     {
         return $this->acuracia;
     }
 
     /**
-     * @param mixed $acuracia
+     * @param float $acuracia
      */
-    public function setAcuracia($acuracia)
+    public function setAcuracia(float $acuracia)
     {
         $this->acuracia = $acuracia;
     }
 
     /**
-     * @return mixed
+     * @return float
      */
-    public function getDirecao()
+    public function getDirecao(): float
     {
         return $this->direcao;
     }
 
     /**
-     * @param mixed $direcao
+     * @param float $direcao
      */
-    public function setDirecao($direcao)
+    public function setDirecao(float $direcao)
     {
         $this->direcao = $direcao;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getAcuraciaDirecao()
-    {
-        return $this->acuraciaDirecao;
-    }
-
-    /**
-     * @param mixed $acuraciaDirecao
-     */
-    public function setAcuraciaDirecao($acuraciaDirecao)
-    {
-        $this->acuraciaDirecao = $acuraciaDirecao;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTimestamp()
+    public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
     /**
-     * @param mixed $timestamp
+     * @param int $timestamp
      */
-    public function setTimestamp($timestamp)
+    public function setTimestamp(int $timestamp)
     {
         $this->timestamp = $timestamp;
     }
 
     /**
-     * @return mixed
+     * @return float
      */
-    public function getLatitude()
+    public function getLatitude(): float
     {
         return $this->latitude;
     }
 
     /**
-     * @param mixed $latitude
+     * @param float $latitude
      */
-    public function setLatitude($latitude)
+    public function setLatitude(float $latitude)
     {
         $this->latitude = $latitude;
     }
 
     /**
-     * @return mixed
+     * @return float
      */
-    public function getLongitude()
+    public function getLongitude(): float
     {
         return $this->longitude;
     }
 
     /**
-     * @param mixed $longitude
+     * @param float $longitude
      */
-    public function setLongitude($longitude)
+    public function setLongitude(float $longitude)
     {
         $this->longitude = $longitude;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getProvider()
+    public function getProvider(): string
     {
         return $this->provider;
     }
 
     /**
-     * @param mixed $provider
+     * @param string $provider
      */
-    public function setProvider($provider)
+    public function setProvider(string $provider)
     {
         $this->provider = $provider;
     }
 
     /**
-     * @return mixed
+     * @return float
      */
-    public function getVelocidade()
+    public function getVelocidade(): float
     {
         return $this->velocidade;
     }
 
     /**
-     * @param mixed $velocidade
+     * @param float $velocidade
      */
-    public function setVelocidade($velocidade)
+    public function setVelocidade(float $velocidade)
     {
         $this->velocidade = $velocidade;
     }
 
     /**
-     * @return mixed
+     * @return Viagem
      */
-    public function getAcuraciaVelocidade()
+    public function getViagem(): Viagem
     {
-        return $this->acuraciaVelocidade;
+        return $this->viagem;
     }
 
     /**
-     * @param mixed $acuraciaVelocidade
+     * @param Viagem $viagem
      */
-    public function setAcuraciaVelocidade($acuraciaVelocidade)
+    public function setViagem(Viagem $viagem)
     {
-        $this->acuraciaVelocidade = $acuraciaVelocidade;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAcuraciaVertical()
-    {
-        return $this->acuraciaVertical;
-    }
-
-    /**
-     * @param mixed $acuraciaVertical
-     */
-    public function setAcuraciaVertical($acuraciaVertical)
-    {
-        $this->acuraciaVertical = $acuraciaVertical;
+        $this->viagem = $viagem;
     }
 }

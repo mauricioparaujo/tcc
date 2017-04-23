@@ -2,6 +2,9 @@
 
 namespace StaticBundle\Data\Entity;
 
+use Symfony\Component\Validator\Constraints\DateTime;
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Viagem
  *
@@ -20,34 +23,56 @@ class Viagem
     private $id;
 
     /**
-     * @ORM\Column(name="inicio", type="datetime")
+     * @var DateTime
+     *
+     * @ORM\Column(name="inicio", type="datetime", nullable=false)
      */
-    private $inicio;
+    private $inicio = 0;
 
     /**
-     * @ORM\Column(name="fim", type="datetime")
+     * @var DateTime
+     *
+     * @ORM\Column(name="fim", type="datetime", nullable=true)
      */
     private $fim;
 
     /**
-     * @ORM\Column(name="fotoInicial", type="string", length=255, nullable=false)
+     * @var Foto
+     *
+     * @ORM\OneToOne(targetEntity="Foto", cascade={"remove"})
+     * @ORM\JoinColumn(name="foto_inicial_id", referencedColumnName="id", nullable=false)
      */
-    private $fotoInicial;
+    private $fotoInicial = "";
 
     /**
-     * @ORM\Column(name="fotoFinal", type="string", length=255, nullable=true)
+     * @var Foto
+     *
+     * @ORM\OneToOne(targetEntity="Foto", cascade={"remove"})
+     * @ORM\JoinColumn(name="foto_final_id", referencedColumnName="id")
      */
     private $fotoFinal;
 
     /**
-     * @ManyToOne(targetEntity="Motorista", inversedBy="viagens")
+     * @var Motorista
+     *
+     * @ORM\ManyToOne(targetEntity="Motorista", inversedBy="viagens")
+     * @ORM\JoinColumn(name="motorista_id", referencedColumnName="id")
      */
     private $motorista;
 
     /**
-     * @OneToMany(targetEntity="Localizacao", mappedBy="viagem", cascade={"remove"})
+     * @var Localizacao[]
+     *
+     * @ORM\OneToMany(targetEntity="Localizacao", mappedBy="viagem", cascade={"remove"})
      */
-    private $localizacoes;
+    private $localizacoes = [];
+
+    public function __construct(DateTime $inicio, Foto $fotoInicial, Motorista $motorista)
+    {
+        $this->inicio = $inicio;
+        $this->fotoInicial = $fotoInicial;
+        $this->motorista = $motorista;
+    }
 
     /**
      * Get id
@@ -60,7 +85,71 @@ class Viagem
     }
 
     /**
-     * @return mixed
+     * @return DateTime
+     */
+    public function getInicio(): DateTime
+    {
+        return $this->inicio;
+    }
+
+    /**
+     * @param DateTime $inicio
+     */
+    public function setInicio(DateTime $inicio)
+    {
+        $this->inicio = $inicio;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getFim(): DateTime
+    {
+        return $this->fim;
+    }
+
+    /**
+     * @param DateTime $fim
+     */
+    public function setFim(DateTime $fim)
+    {
+        $this->fim = $fim;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFotoInicial(): string
+    {
+        return $this->fotoInicial;
+    }
+
+    /**
+     * @param string $fotoInicial
+     */
+    public function setFotoInicial(string $fotoInicial)
+    {
+        $this->fotoInicial = $fotoInicial;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFotoFinal(): string
+    {
+        return $this->fotoFinal;
+    }
+
+    /**
+     * @param string $fotoFinal
+     */
+    public function setFotoFinal(string $fotoFinal)
+    {
+        $this->fotoFinal = $fotoFinal;
+    }
+
+    /**
+     * @return Motorista
      */
     public function getMotorista()
     {
@@ -68,79 +157,7 @@ class Viagem
     }
 
     /**
-     * @param mixed $motorista
-     */
-    public function setMotorista($motorista)
-    {
-        $this->motorista = $motorista;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getInicio()
-    {
-        return $this->inicio;
-    }
-
-    /**
-     * @param mixed $inicio
-     */
-    public function setInicio($inicio)
-    {
-        $this->inicio = $inicio;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFim()
-    {
-        return $this->fim;
-    }
-
-    /**
-     * @param mixed $fim
-     */
-    public function setFim($fim)
-    {
-        $this->fim = $fim;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFotoInicial()
-    {
-        return $this->fotoInicial;
-    }
-
-    /**
-     * @param mixed $fotoInicial
-     */
-    public function setFotoInicial($fotoInicial)
-    {
-        $this->fotoInicial = $fotoInicial;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFotoFinal()
-    {
-        return $this->fotoFinal;
-    }
-
-    /**
-     * @param mixed $fotoFinal
-     */
-    public function setFotoFinal($fotoFinal)
-    {
-        $this->fotoFinal = $fotoFinal;
-    }
-
-    /**
-     * @return mixed
+     * @return array
      */
     public function getLocalizacoes()
     {
@@ -148,10 +165,10 @@ class Viagem
     }
 
     /**
-     * @param mixed $localizacoes
+     * @param Localizacao $localizacoes
      */
-    public function setLocalizacoes($localizacoes)
+    public function addLocalizacao(Localizacao $localizacao)
     {
-        $this->localizacoes = $localizacoes;
+        $this->localizacoes[] = $localizacao;
     }
 }

@@ -29,7 +29,7 @@ class Motorista
     private $nome;
 
     /**
-     * @OneToMany(targetEntity="Viagem", mappedBy="motorista", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Viagem", mappedBy="motorista", cascade={"remove"})
      */
     private $viagens;
 
