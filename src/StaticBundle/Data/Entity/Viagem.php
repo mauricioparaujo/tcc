@@ -2,7 +2,7 @@
 
 namespace StaticBundle\Data\Entity;
 
-use Symfony\Component\Validator\Constraints\DateTime;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

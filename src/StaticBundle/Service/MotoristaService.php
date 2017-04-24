@@ -3,6 +3,7 @@
 namespace StaticBundle\Service;
 
 use Doctrine\ORM\EntityNotFoundException;
+use StaticBundle\Data\Entity\Motorista;
 use StaticBundle\Data\Repository\MotoristaRepository;
 
 class MotoristaService
@@ -14,7 +15,7 @@ class MotoristaService
         $this->repository = $repository;
     }
 
-    public function getMotorista(int $id)
+    public function get(int $id)
     {
         $motorista = $this->repository->findOneById($id);
 
@@ -25,20 +26,19 @@ class MotoristaService
         return $motorista;
     }
 
-    public function createMotorista(string $nome)
+    public function create(Motorista $motorista)
     {
-        return $this->repository->createMotorista($nome);
+        return $this->repository->create($motorista);
     }
 
-    public function updateMotorista(int $id, string $nome)
+    public function update(Motorista $motorista)
     {
-        $motorista = $this->getMotorista($id);
-        return $this->repository->updateMotorista($motorista, $nome);
+        return $this->repository->update($motorista);
     }
 
-    public function deleteMotorista(int $id)
+    public function delete(int $id)
     {
-        $motorista = $this->getMotorista($id);
-        $this->repository->deleteMotorista($motorista);
+        $motorista = $this->get($id);
+        $this->repository->delete($motorista);
     }
 }

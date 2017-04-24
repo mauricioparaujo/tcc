@@ -2,6 +2,7 @@
 
 namespace StaticBundle\Data\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,7 +38,7 @@ class Localizacao
 
 
     /**
-     * @var int
+     * @var DateTime
      *
      * @ORM\Column(name="timestamp", type="datetime", nullable=false)
      */

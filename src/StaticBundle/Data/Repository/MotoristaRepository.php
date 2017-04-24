@@ -7,27 +7,21 @@ use StaticBundle\Data\Entity\Motorista;
 
 class MotoristaRepository extends EntityRepository
 {
-    public function deleteMotorista(Motorista $motorista)
+    public function delete(Motorista $motorista)
     {
         $this->getEntityManager()->remove($motorista);
         $this->getEntityManager()->flush();
     }
 
-    public function updateMotorista(Motorista $motorista, string $nome)
+    public function update(Motorista $motorista)
     {
-        $motorista->setNome($nome);
-
         $this->getEntityManager()->flush();
 
         return $motorista;
     }
 
-    public function createMotorista(string $nome)
+    public function create(Motorista $motorista)
     {
-        $motorista = new Motorista();
-
-        $motorista->setNome($nome);
-
         $this->getEntityManager()->persist($motorista);
         $this->getEntityManager()->flush();
 

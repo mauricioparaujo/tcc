@@ -29,11 +29,11 @@ class ViagemController extends FOSRestController
      *
      * rota:
      * * "post_motorista_viagem"
-     * * [POST] /motorista/{motoristaId}/viagem/{id}
+     * * [POST] /motorista/{motoristaId}/viagem
      */
-    public function postAction($motoristaId, $id)
+    public function postAction($motoristaId)
     {
-        return new JsonResponse($id, Response::HTTP_OK);
+        return new JsonResponse($motoristaId, Response::HTTP_OK);
     }
 
     /**

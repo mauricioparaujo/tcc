@@ -38,7 +38,9 @@ class MotoristaController extends FOSRestController
     {
         $nome = $request->get('nome');
 
-        $motorista = $this->get('service.motorista')->createMotorista($nome);
+        $motorista = new Motorista($nome);
+
+        $motorista = $this->get('service.motorista')->create($motorista);
         return new Response($this->serialize($motorista), Response::HTTP_CREATED);
     }
 
@@ -51,7 +53,7 @@ class MotoristaController extends FOSRestController
      */
     public function deleteAction(int $id)
     {
-        $this->get('service.motorista')->deleteMotorista($id);
+        $this->get('service.motorista')->delete($id);
         return new Response('', Response::HTTP_NO_CONTENT);
     }
 
@@ -65,14 +67,18 @@ class MotoristaController extends FOSRestController
     public function putAction(Request $request, int $id)
     {
         $nome = $request->get('nome');
-        $motorista = $this->get('service.motorista')->updateMotorista($id, $nome);
+
+        $motorista = $this->findMotorista($id);
+        $motorista->setNome($nome);
+
+        $motorista = $this->get('service.motorista')->update($motorista);
         return new Response($this->serialize($motorista), Response::HTTP_ACCEPTED);
     }
 
     private function findMotorista(int $id)
     {
         try {
-            $motorista = $this->get('service.motorista')->getMotorista($id);
+            $motorista = $this->get('service.motorista')->get($id);
         } catch (EntityNotFoundException $e) {
             throw $this->createNotFoundException('Motorista nao encontrado');
         }
