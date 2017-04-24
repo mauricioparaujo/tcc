@@ -14,7 +14,7 @@ class ViagemService
         $this->repository = $repository;
     }
 
-    public function getViagem(int $id)
+    public function get(int $id)
     {
         $viagem = $this->repository->findOneById($id);
 
@@ -25,20 +25,20 @@ class ViagemService
         return $viagem;
     }
 
-    public function createViagem(string $nome)
+    public function create(string $nome)
     {
         return $this->repository->createViagem($nome);
     }
 
-    public function updateViagem(int $id, string $nome)
+    public function update(int $id, string $nome)
     {
-        $viagem = $this->getViagem($id);
-        return $this->repository->updateViagem($viagem, $nome);
+        $viagem = $this->get($id);
+        return $this->repository->update($viagem, $nome);
     }
 
     public function deleteViagem(int $id)
     {
-        $viagem = $this->getViagem($id);
-        $this->repository->deleteViagem($viagem);
+        $viagem = $this->get($id);
+        $this->repository->delete($viagem);
     }
 }

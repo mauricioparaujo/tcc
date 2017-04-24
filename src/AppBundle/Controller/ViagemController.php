@@ -4,8 +4,12 @@ namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
+use StaticBundle\Data\Entity\Foto;
+use StaticBundle\Data\Entity\Viagem;
+use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use DateTime;
 
 /**
  * @RouteResource("viagem", pluralize=false)
@@ -31,8 +35,15 @@ class ViagemController extends FOSRestController
      * * "post_motorista_viagem"
      * * [POST] /motorista/{motoristaId}/viagem
      */
-    public function postAction($motoristaId)
+    public function postAction(Request $request, int $motoristaId)
     {
+        $inicio = $request->get('inicio');
+        $foto = $request->get('foto');
+        $motorista = $this->get('service.motorista')->get($motoristaId);
+
+        $viagem = new Viagem(new DateTime($inicio), new Foto(), $motorista);
+
+        $this->get('service.viagem')->create($viagem);
         return new JsonResponse($motoristaId, Response::HTTP_OK);
     }
 
